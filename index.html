@@ -10,17 +10,25 @@
 </head>
 <body>
 
-
-<p>Press any key to get started</p>
-<h1>Game Word: <span id="gameWord"></span></h1>
-<h1>Your Guesses: <span id="guessedLetters">""</span></h1>
-<h1>Guesses Remaining: <span id="remainingGuesses">0</span></h1>
-<div id = "hangmanImage">
-    <img src="assets/images/Stark0.png">
+<div class="stats column">
+    <p>Press any key to get started</p>
+    <h1>Game Word:</h1>
+    <h2 id="underscores"></h2>
+    <h1>Your Guesses: </h1>
+    <h2 id="guessedLetters"></h2>
+    <h1>Guesses Remaining: </h1>
+    <h2 id="remainingGuesses"></h2>
+    <div id = "hangmanImage">
+        <img id="hangmanIndex" src="assets/images/Stark0.png">
+    </div>
 </div>
 
 
 
 <script type="text/javascript" src="assets/javascript/game.js"></script>
+<script>
+    resetGame(); 
+    updateDisplay();
+</script>
 </body>
 </html>

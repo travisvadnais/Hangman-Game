@@ -49,7 +49,7 @@ function resetGame() {
     //New function to set up 'underscores' array.  Need to figure out how to remove commas
     for (var i = 0; i < gameWord.length; i++) {
         if (gameWord.charAt(i) == " ") {
-            underscores.push(" ");
+            underscores.push("  ");
         }
         else if (gameWord.charAt(i) == "'") {
             underscores.push("'");
@@ -95,16 +95,15 @@ function evaluateGuess(letter) {
     }
     //First 'If' condition analyzes the 'positions' array.  If there's nothing in there, that means the letter does not exist in the gameWord, so we'll decrement remainingGuesses.  We'll also code in an img change here
     if (positions.length <= 0) {
-        if (guessedLetters.indexOf(letter) === -1) {
+        if (guessedLetters.indexOf(" " + letter) === -1) {
             //If it's not there, we're pushing it to the guessedLetters array
             guessedLetters.push(" " + letter);
             remainingGuesses--;
         }
-        else if (guessedLetters.indexOf(letter) !== -1) {
+        else {
             alert("You already guessed '" + letter + "'. Pick another letter." );
         }
         
-        //***IMAGE CHANGE GOES HERE */
 
         //Start 2nd condition
     } else {
@@ -121,11 +120,14 @@ function evaluateGuess(letter) {
     }
 
 function updateDisplay() {
-    document.getElementById("underscores").innerText = underscores;
+    var displayUnderscores = underscores.join("");
+    document.getElementById("underscores").innerText = displayUnderscores;
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("guessedLetters").innerText = guessedLetters;
     document.getElementById("hangmanIndex").src = "assets/images/Stark" + remainingGuesses + ".PNG";
 }
+
+
 
 
 //Also - incorrect guesses will need to add to a counter that will cause a game over at 8

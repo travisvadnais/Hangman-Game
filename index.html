@@ -10,20 +10,39 @@
 </head>
 <body>
 
-<div class="stats column">
-    <p>Press any key to get started</p>
-    <h1>Game Word:</h1>
-    <h2 id="underscores"></h2>
-    <h1>Your Guesses: </h1>
-    <h2 id="guessedLetters"></h2>
-    <h1>Guesses Remaining: </h1>
-    <h2 id="remainingGuesses"></h2>
-    <div id = "hangmanImage">
-        <img id="hangmanIndex" src="assets/images/Stark0.png">
-    </div>
-</div>
+    <header id="masthead">
+        <div class="container">
+            <a href="index.html" id="logo">Travis Vadnais</a>
+                <nav>
+                    <a href="index.html">About</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+        </div>
+    </header>
 
 
+    <div id="main-container">
+        <div class="stats-column">
+            <div class="gameLogo">
+                <img id = "GoT_Logo" src="assets/images/GoT_Logo.jpg" alt="hangman Logo">
+                <img id = "GoT_Logo2" src="assets/images/GoT_Logo2.jpg" alt="Hangman Logo">
+            </div>
+            <p>Press any key to get started</p>
+            <div id = "hangmanImage">
+                <img id="hangmanIndex" src="assets/images/Stark0.png">
+            </div>
+            <br>
+            <div id="game_word">
+                <h1 id="game_word">Game Word:</h1>
+                <h2 id="underscores"></h2>
+            </div>
+            <h1>Your Guesses: </h1>
+            <h2 id="guessedLetters"></h2>
+            <h1>Guesses Remaining: </h1>
+            <h2 id="remainingGuesses"></h2>
+        </div>
+    </div>  
 
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 <script>
@@ -32,3 +51,22 @@
 </script>
 </body>
 </html>
+
+<!-- What's Left
+
+1. Clean up all text elements
+2. Consider a 'Stage' type of setup for the images and the actual gameplay display
+3. Figure out how to get spaces to display properly
+4. Figure out how to get caps letters to display properly
+5. Create a button to get started and make it clickable within the GoT hangman image.  This will just launch the function on click
+6. Put in a test for if the game is over or not
+7. Put in a footer
+8. Media Queries
+9. Add in more words
+10. Code something for when a correct letter is guessed twice
+11. Add in a Wins counter
+***BONUS SECTION***
+1. Add in a video clip of the execution to play on a loss
+12. Add in a second variety of pictures
+13. Add additional backgrounds
+14. Add in -->

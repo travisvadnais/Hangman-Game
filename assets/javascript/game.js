@@ -93,7 +93,7 @@ function evaluateGuess(letter) {
             positions.push(i);
         }
     }
-    //First 'If' condition analyzes the 'positions' array.  If there's nothing in there, that means the letter does not exist in the gameWord, so we'll decrement remainingGuesses.  We'll also code in an img change here
+    //First 'If' condition analyzes the 'positions' array.  If there's nothing in there, that means the letter does not exist in the gameWord, so we'll decrement remainingGuesses. 
     if (positions.length <= 0) {
         if (guessedLetters.indexOf(" " + letter) === -1) {
             //If it's not there, we're pushing it to the guessedLetters array
@@ -115,9 +115,16 @@ function evaluateGuess(letter) {
                 underscores[positions[j]] = letter;
         }
     }
+    checkWins();
     updateDisplay();
         
     }
+
+function checkWins() {
+    if (underscores.indexOf("_ ") === -1) {
+        wins++;
+    }
+}
 
 function updateDisplay() {
     var displayUnderscores = underscores.join("");
@@ -125,6 +132,7 @@ function updateDisplay() {
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("guessedLetters").innerText = guessedLetters;
     document.getElementById("hangmanIndex").src = "assets/images/Stark" + remainingGuesses + ".PNG";
+    document.getElementById("winsCounter").innerText = wins;
 }
 
 

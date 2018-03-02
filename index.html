@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
     <title>Hangman</title>
 </head>
 <body>
@@ -27,22 +28,40 @@
             <div class="gameLogo">
                 <img id = "GoT_Logo" src="assets/images/GoT_Logo.jpg" alt="hangman Logo">
                 <img id = "GoT_Logo2" src="assets/images/GoT_Logo2.jpg" alt="Hangman Logo">
+                <button id="start-button" type="button" onclick="resetGame()">Click to Start</button>
             </div>
-            <p>Press any key to get started</p>
-            <div id = "hangmanImage">
-                <img id="hangmanIndex" src="assets/images/Stark0.png">
-            </div>
+            <div id="stage">
+                <div id = "hangmanImage">
+                    <img id="hangmanIndex" src="assets/images/Stark0.png">
+                </div>
             <br>
-            <div id="game_word">
-                <h1 id="game_word">Game Word:</h1>
-                <h2 id="underscores"></h2>
+                <div id="game_word">
+                    <h1 id="game_word">Game Word:</h1>
+                    <br>
+                    <h2 id="underscores"></h2>
+                    <br>
+                    <br>
+                    <h1>Your Guesses: </h1>
+                    <br>
+                    <h2 id="guessedLetters"></h2>
+                    <br>
+                    <br>
+                    <h1>Guesses Remaining: </h1>
+                    <br>
+                    <h2 id="remainingGuesses"></h2>
+                    <br>
+                    <h1 id="wins">Wins: </h1>
+                    <h2 id="winsCounter"></h2>
+                </div>
             </div>
-            <h1>Your Guesses: </h1>
-            <h2 id="guessedLetters"></h2>
-            <h1>Guesses Remaining: </h1>
-            <h2 id="remainingGuesses"></h2>
         </div>
-    </div>  
+    </div>
+    <div class="clear"></div>
+    <footer>
+        <div class="footer">
+            <h5>Copyright &copy; 2018 Travis Vadnais</h5>
+        </div>
+    </footer>  
 
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 <script>
@@ -54,17 +73,17 @@
 
 <!-- What's Left
 
-1. Clean up all text elements
-2. Consider a 'Stage' type of setup for the images and the actual gameplay display
+1. Clean up all text elements - DONE
+2. Consider a 'Stage' type of setup for the images and the actual gameplay display - DONE
 3. Figure out how to get spaces to display properly
 4. Figure out how to get caps letters to display properly
-5. Create a button to get started and make it clickable within the GoT hangman image.  This will just launch the function on click
+5. Create a button to get started and make it clickable within the GoT hangman image.  This will just launch the function on click - DONE
 6. Put in a test for if the game is over or not
-7. Put in a footer
+7. Put in a footer - DONE
 8. Media Queries
-9. Add in more words
+9. Add in more words - DONE
 10. Code something for when a correct letter is guessed twice
-11. Add in a Wins counter
+11. Add in a Wins counter - DONE
 ***BONUS SECTION***
 1. Add in a video clip of the execution to play on a loss
 12. Add in a second variety of pictures

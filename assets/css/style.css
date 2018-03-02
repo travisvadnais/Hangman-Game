@@ -4,6 +4,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     color: whitesmoke;
+    font-family: 'MedievalSharp', cursive, serif;
 }
 
 #masthead {
@@ -75,7 +76,7 @@ nav a:first-child {
 
 #main-container {
     margin-top: 100px;
-    width: 50%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -90,7 +91,7 @@ nav a:first-child {
     border: 1px solid #a9a9a9;
     border-radius: 25px;
     max-height: 264px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 }
 
 .gameLogo img#GoT_Logo {
@@ -108,11 +109,23 @@ nav a:first-child {
     right: 20px;
     z-index: 2;
 }
+button#start-button {
+    position: absolute;
+    bottom: 25px;
+    left: 50px;
+    z-index: 2;
+    width: 30%;
+    height: 20%;
+    font-size: 20px;
+    background-color: #a9a9a9;
+}
+
 
 #hangmanImage {
     max-width: 528px;
-    margin: 0 auto;
-    
+    max-height: 300px;
+    float: right;   
+    margin-top: 18px; 
 }
 
 #hangmanImage img {
@@ -120,6 +133,45 @@ nav a:first-child {
     margin-left: 70px;
     border: 1px solid #a9a9a9;
 }
+
+div#game_word {
+    float: right;
+}
+
+h1#game_word, h1 {
+    text-align: left;
+    font-size: 32px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+}
+
+h1#wins {
+    display: inline;
+}
+
+h2#winsCounter {
+    display: inline;
+}
+
+.clear {
+    clear: both;
+}
+
+footer {
+    background: #666;
+    color: #fff;
+    padding: 30px 0;
+    clear: both;
+    border-top: 8px solid #4aaaa5;
+    color: #ccc;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 50px;
+}
+
 
 
 

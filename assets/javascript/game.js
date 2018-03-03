@@ -22,6 +22,9 @@ var remainingGuesses;
 //counter for wins
 var wins = 0;
 
+//array to hold the two sets of hangman picture progressions
+var pictureSet = ["Stark", "Wall"];
+
 var hasFinished = false;
 
 //startGame() function needs to reset remainingGuesses to 0; choose a random word from the array; build out the underscores[] array; and write that array to the document.  Right now it's writing to the first line, but this will be updated once CSS is coded
@@ -49,6 +52,9 @@ function resetGame() {
 
     //generate random word/phrase
     gameWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+
+    //generate set of pictures to use
+    pictureSetSelection = pictureSet[Math.floor(Math.random() * pictureSet.length)];
     
     //alert is just for my reference and will be deleted on final
     console.log(gameWord);
@@ -139,7 +145,7 @@ function updateDisplay() {
     document.getElementById("underscores").innerText = displayUnderscores;
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("guessedLetters").innerText = guessedLetters;
-    document.getElementById("hangmanIndex").src = "assets/images/Stark" + remainingGuesses + ".PNG";
+    document.getElementById("hangmanIndex").src = "assets/images/" + pictureSetSelection + remainingGuesses + ".PNG";
     checkWins();
 }
 function checkWins() {
@@ -157,11 +163,23 @@ function checkWins() {
         hasFinished = true;
         
         //After loss, populate iframe clip
-        var iframe = document.createElement("iframe");
-        iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1"); iframe.style.width = "560";
-        iframe.style.height = "315";
-        document.getElementById("executionClip").appendChild(iframe);
-        document.getElementById("executionClip").style.display = 'block';
+        if (pictureSetSelection === "Stark") {
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1");
+            iframe.style.width = "560";
+            iframe.style.height = "315";
+            document.getElementById("executionClip").appendChild(iframe);
+            document.getElementById("executionClip").style.display = 'block';
+        }
+        //This is the second iFrame scenario
+        else {
+            var iframe2 = document.createElement("iframe");
+            iframe2.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
+            iframe2.style.width = "560";
+            iframe2.style.height = "315";
+            document.getElementById("executionClip").appendChild(iframe2);
+            document.getElementById("executionClip").style.display = 'block';
+        }
         
         //After loss, populate 'LOSER' message
         document.getElementById("resultsDisplay").style.display = 'block';

@@ -22,8 +22,21 @@ var remainingGuesses;
 //counter for wins
 var wins = 0;
 
+var hasFinished = false;
+
 //startGame() function needs to reset remainingGuesses to 0; choose a random word from the array; build out the underscores[] array; and write that array to the document.  Right now it's writing to the first line, but this will be updated once CSS is coded
 function resetGame() {
+
+    hasFinished = false;
+
+    //This will hide the "You Lose" text when restarting after a loss
+    document.getElementById("resultsDisplay").style.display = 'none';
+    
+    //This will delete the embedded video that gets built in after a loss
+    var node = document.getElementById('executionClip');
+        while (node.hasChildNodes()) {
+            node.removeChild(node.firstChild);
+        }
 
     //sets remaining guesses to 8
     remainingGuesses = maxTries;
@@ -40,13 +53,7 @@ function resetGame() {
     //alert is just for my reference and will be deleted on final
     console.log(gameWord);
 
-            //OLD FUNCTION FOR UNDERSCORES ARRAY - CAN DELETE IF WE FIGURE OUT HOW TO REMOVE COMMAS FROM ARRAY
-            //sets up the underscores array
-            // for (var i = 0; i < gameWord.length; i++) {
-            //     underscores.push("_ ");
-            // }   
-
-    //New function to set up 'underscores' array.  Need to figure out how to remove commas
+    //New function to set up 'underscores' array.  Need to figure out how to add spaces
     for (var i = 0; i < gameWord.length; i++) {
         if (gameWord.charAt(i) == " ") {
             underscores.push("  ");
@@ -58,21 +65,28 @@ function resetGame() {
             underscores.push("_ ");
         }
     }
-    alert("WARNING: This game is dark and full of spoilers");
+    if (wins === 0) {
+        alert("WARNING: This game is dark and full of spoilers");
+    }
     updateDisplay();
 }
 
 //Check entered key to see if it's a letter.  If so, change it to lowercase and continue.  
 
 document.onkeydown = function(event) {
-    //set userGuess variable to the key that was pressed
-    userGuess = event.key;
-    //If statement that will only process if the key pressed was a letter
-    if (event.keyCode >= 65 && event.keyCode <=90) {
-        //This alert should only pop if it's a letter.  I'll probably delete or modify this - it's mainly here for my reference right now instead of console log
-        alert("You guessed " + userGuess);
-        //This will set up function 'makeGuess' with a lowercase letter
-        evaluateGuess(event.key.toLowerCase());
+    if (hasFinished === true) {
+        resetGame();
+    }
+    else {
+        //set userGuess variable to the key that was pressed
+        userGuess = event.key;
+        //If statement that will only process if the key pressed was a letter
+        if (event.keyCode >= 65 && event.keyCode <=90) {         
+            //This alert should only pop if it's a letter.  I'll probably delete or modify this - it's mainly here for my reference right now instead of console log
+            alert("You guessed " + userGuess);
+            //This will set up function 'makeGuess' with a lowercase letter
+            evaluateGuess(event.key.toLowerCase());
+        }
     }  
 }
 
@@ -88,7 +102,7 @@ function evaluateGuess(letter) {
     
     //For loop is checking if/where characters match in the gameWord
     for (var i = 0; i < gameWord.length; i++) {
-        if (gameWordLowercase.charAt(i) === letter) {
+         if (gameWordLowercase.charAt(i) === letter) {
             //this pushes the index of the letter match to the positions array above
             positions.push(i);
         }
@@ -115,16 +129,10 @@ function evaluateGuess(letter) {
                 underscores[positions[j]] = letter;
         }
     }
-    checkWins();
     updateDisplay();
+    
         
     }
-
-function checkWins() {
-    if (underscores.indexOf("_ ") === -1) {
-        wins++;
-    }
-}
 
 function updateDisplay() {
     var displayUnderscores = underscores.join("");
@@ -132,10 +140,33 @@ function updateDisplay() {
     document.getElementById("remainingGuesses").innerText = remainingGuesses;
     document.getElementById("guessedLetters").innerText = guessedLetters;
     document.getElementById("hangmanIndex").src = "assets/images/Stark" + remainingGuesses + ".PNG";
-    document.getElementById("winsCounter").innerText = wins;
+    checkWins();
 }
+function checkWins() {
+    if (underscores.indexOf("_ ") === -1) {
+        wins++;
+        document.getElementById("winsCounter").innerText = wins;
+        hasFinished = true;
 
+        //After win, populate 'WINNER' message
+        document.getElementById("resultsDisplay").style.display = 'block';
+        var theDiv = document.getElementById("resultsDisplay");
+        theDiv.innerHTML = "You Win!  Press any key to play again!"
+    }
+    else if (remainingGuesses <= 0) {
+        hasFinished = true;
+        
+        //After loss, populate iframe clip
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1"); iframe.style.width = "560";
+        iframe.style.height = "315";
+        document.getElementById("executionClip").appendChild(iframe);
+        document.getElementById("executionClip").style.display = 'block';
+        
+        //After loss, populate 'LOSER' message
+        document.getElementById("resultsDisplay").style.display = 'block';
+        var theDiv = document.getElementById("resultsDisplay");
+        theDiv.innerHTML = "You Lose.  Press any key to play again!"
 
-
-
-//Also - incorrect guesses will need to add to a counter that will cause a game over at 8
+    }
+}

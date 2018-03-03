@@ -109,6 +109,7 @@ nav a:first-child {
     right: 20px;
     z-index: 2;
 }
+
 button#start-button {
     position: absolute;
     bottom: 25px;
@@ -118,6 +119,21 @@ button#start-button {
     height: 20%;
     font-size: 20px;
     background-color: #a9a9a9;
+}
+
+#executionClip iframe {
+    width: 70%;
+    margin-left: 15%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+#resultsDisplay {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 45px;
+    font-weight: bold;
 }
 
 
@@ -133,6 +149,8 @@ button#start-button {
     margin-left: 70px;
     border: 1px solid #a9a9a9;
 }
+
+
 
 div#game_word {
     float: right;
@@ -173,7 +191,31 @@ footer {
 }
 
 
+/* INDEX Width at 980px and below */
+@media screen and (max-width: 980px) {
 
+    #hangmanImage img {
+        max-width: 100%;
+        margin-left: 70px;
+        border: 1px solid #a9a9a9;
+    }
+    
+    .gameLogo {
+        max-width: 100%;
+        margin-left: 0;
+    }
+    .gameLogo img {
+        max-width: 25%;
+    }
+}
+
+/* INDEX Width at 768px and below */
+
+@media screen and (max-width: 768px) {}
+
+    /* INDEX Width at 640px and below */
+
+@media screen and (max-width: 640px) {}
 
 
 

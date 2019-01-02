@@ -77,6 +77,10 @@ button#start-button {
     background-color: #a9a9a9;
 }
 
+#executionClip, #resultsDisplay {
+  display: block;
+}
+
 #executionClip iframe {
     width: 70%;
     margin-left: 15%;
@@ -119,12 +123,16 @@ h2 {
     font-size: 24px;
 }
 
-h1#wins {
+#wins, #winsCounter, #losses, #lossCounter {
     display: inline;
 }
 
-h2#winsCounter {
-    display: inline;
+#underscores, #guessedLetters, #remainingGuesses, #wins, #winsCounter, #losses, #lossCounter {
+  padding-bottom: 20px;
+}
+
+#game_word, #yourGuesses, #guessesRemaining {
+  padding-bottom: 15px;
 }
 
 .clear {

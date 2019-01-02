@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
     <title>Hangman</title>
 </head>
 <body>
@@ -27,21 +32,15 @@
                 <br>
                 <div id="game_word">
                     <h1 id="game_word">Game Word:</h1>
-                    <br>
                     <h2 id="underscores"></h2>
-                    <br>
-                    <br>
-                    <h1>Your Guesses: </h1>
-                    <br>
+                    <h1 id=yourGuesses>Your Guesses: </h1>
                     <h2 id="guessedLetters"></h2>
-                    <br>
-                    <br>
-                    <h1>Guesses Remaining: </h1>
-                    <br>
+                    <h1 id="guessesRemaining">Guesses Remaining: </h1>
                     <h2 id="remainingGuesses"></h2>
-                    <br>
                     <h1 id="wins">Wins: </h1>
                     <h2 id="winsCounter"></h2>
+                    <h1 id="losses">&nbsp;&nbsp;Losses: </h1>
+                    <h2 id="lossCounter"></h2>
                 </div>
             </div>
         </div>
@@ -60,15 +59,3 @@
 </script>
 </body>
 </html>
-
-<!-- What's Left
-
-3. Figure out how to get spaces to display properly
-4. Figure out how to get caps letters to display properly
-8. Media Queries
-10. Code something for when a correct letter is guessed twice
-
-***BONUS SECTION***
-12. Add in a second variety of pictures
-13. Add additional backgrounds
-14. Add in -->

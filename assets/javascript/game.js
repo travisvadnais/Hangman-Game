@@ -19,8 +19,9 @@ const maxTries = 8;
 //counter for the # of guesses player has left
 let remainingGuesses;
 
-//counter for wins
+//counter for wins/losses
 let wins = 0;
+let losses = 0;
 
 //array to hold the two sets of hangman picture progressions
 let pictureSet = ["Stark", "Wall"];
@@ -34,6 +35,8 @@ function resetGame() {
 
     //This will hide the "You Lose" text when restarting after a loss
     document.getElementById("resultsDisplay").style.display = 'none';
+    $("#winsCounter").text(wins);
+    $("#lossCounter").text(losses);
 
     //This will delete the embedded video that gets built in after a loss
     let node = document.getElementById('executionClip');
@@ -76,7 +79,8 @@ function resetGame() {
 document.onkeydown = function (event) {
   if (hasFinished === true) {
       resetGame();
-  } else {
+  } 
+  else {
     //set userGuess variable to the key that was pressed
     userGuess = event.key;
     //If statement that will only process if the key pressed was a letter
@@ -116,11 +120,11 @@ function evaluateGuess(letter) {
     }
     //Start 2nd condition
   } else {
-    //Here we run a loop thru all entries in 'positions' array and change the letter in that position in the game word to the initial user's input
-    for (var j = 0; j < positions.length; j++) {
-      underscores[positions[j]] = letter.toUpperCase();
+      //Here we run a loop thru all entries in 'positions' array and change the letter in that position in the game word to the initial user's input
+      positions.map((val, j) => {
+        underscores[positions[j]] = letter.toUpperCase();
+      })
     }
-  }
   updateDisplay();
 }
 
@@ -140,34 +144,28 @@ function checkWins() {
     hasFinished = true;
 
     //After win, populate 'WINNER' message
-    document.getElementById("resultsDisplay").style.display = 'block';
     let theDiv = document.getElementById("resultsDisplay");
-    theDiv.innerHTML = "You Win!  Press any key to play again!"
+    theDiv.innerText = "You Win!  Press any key to play again!"
   } else if (remainingGuesses <= 0) {
       hasFinished = true;
+      losses++;
+      $("#lossCounter").text(losses);
 
     //After loss, populate iframe clip
     if (pictureSetSelection === "Stark") {
       let iframe = document.createElement("iframe");
       iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1");
-      iframe.style.width = "560";
-      iframe.style.height = "315";
       document.getElementById("executionClip").appendChild(iframe);
-      document.getElementById("executionClip").style.display = 'block';
     }
     //This is the second iFrame scenario
     else {
       let iframe2 = document.createElement("iframe");
       iframe2.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
-      iframe2.style.width = "560";
-      iframe2.style.height = "315";
       document.getElementById("executionClip").appendChild(iframe2);
-      document.getElementById("executionClip").style.display = 'block';
     }
 
     //After loss, populate 'LOSER' message
-    document.getElementById("resultsDisplay").style.display = 'block';
     let theDiv = document.getElementById("resultsDisplay");
-    theDiv.innerHTML = "You Lose.  Press any key to play again!"
+    theDiv.innerText = "You Lose.  Press any key to play again!"
   }
 }

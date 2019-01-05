@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-    <title>Hangman</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+  </script>
+  <title>Hangman</title>
 </head>
 <body>
-    <div id="main-container">
-        <div class="stats-column">
-            <div class="gameLogo">
-                <img id = "GoT_Logo" src="assets/images/GoT_Logo.jpg" alt="hangman Logo">
-                <img id = "GoT_Logo2" src="assets/images/GoT_Logo2.jpg" alt="Hangman Logo">
-                <button id="start-button" type="button" onclick="resetGame()">Click to Restart</button>
-            </div>
-            <div id="resultsDisplay"></div>
-            <div id="executionClip"></div>
-            <div id="stage">
-                <div id = "hangmanImage">
-                    <img id="hangmanIndex" src="assets/images/Stark0.png">
-                </div>
-                <br>
-                <div id="game_area">
-                    <h1 id="game_word">Game Word:</h1>
-                    <h2 id="underscores"></h2>
-                    <h1 id=yourGuesses>Incorrect Guesses: </h1>
-                    <h2 id="guessedLetters"></h2>
-                    <h1 id="guessesRemaining">Guesses Remaining: </h1>
-                    <h2 id="remainingGuesses"></h2>
-                    <h1 id="wins">Wins: </h1>
-                    <h2 id="winsCounter"></h2>
-                    <h1 id="losses">&nbsp;&nbsp;Losses: </h1>
-                    <h2 id="lossCounter"></h2>
-                </div>
-            </div>
+  <div id="main-container">
+    <div class="stats-column">
+      <div class="gameLogo">
+        <img id = "GoT_Logo" src="assets/images/GoT_Logo.jpg" alt="hangman Logo">
+        <img id = "GoT_Logo2" src="assets/images/GoT_Logo2.jpg" alt="Hangman Logo">
+        <button id="start-button" type="button" onclick="resetGame()">Click to Restart</button>
+      </div>
+      <div id="resultsDisplay"></div>
+      <div id="executionClip"></div>
+      <div id="stage">
+        <div id = "hangmanImage">
+          <img id="hangmanIndex" src="assets/images/Stark0.png">
         </div>
+        <br>
+        <div id="game_area">
+          <h1 id="game_word">Game Word:</h1>
+          <h2 id="underscores"></h2>
+          <h1 id=yourGuesses>Incorrect Guesses: </h1>
+          <h2 id="incorrectGuesses"></h2>
+          <h1 id="guessesRemaining">Guesses Remaining: </h1>
+          <h2 id="remainingGuesses"></h2>
+          <h1 id="wins">Wins: </h1>
+          <h2 id="winsCounter"></h2>
+          <h1 id="losses">&nbsp;&nbsp;Losses: </h1>
+          <h2 id="lossCounter"></h2>
+        </div>
+      </div>
     </div>
+  </div>
     <div class="clear"></div>
     <footer>
-        <div class="footer">
-            <h5>Copyright &copy; 2018 Travis Vadnais</h5>
-        </div>
+      <div class="footer">
+        <h5>Copyright &copy; 2018 Travis Vadnais</h5>
+      </div>
     </footer>  
 
   <script type="text/javascript" src="assets/javascript/game.js"></script>

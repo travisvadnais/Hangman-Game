@@ -23,25 +23,22 @@
   $("#resultsDisplay").text("WARNING: This Game Is Dark and Full of Spoilers");
 
   $("#start-button").click(resetGame);
-  //resetGame() function needs to reset remainingGuesses to 8; choose a random word from the array; build out the underscores[] array; and write that array to the document. 
-  function resetGame() {
-
+  
+  function resetGame() {//Set everything back to defaults
     hasFinished = false;
     remainingGuesses = 8;
+    guessedLetters = [];
     $("#game_area").show();
     $("#resultsDisplay").text("Good Luck!");
     $("#winsCounter").text(wins);
     $("#lossCounter").text(losses);
     $("#executionClip").empty();
-    
-    //resets Guessed Letters to blank
-    guessedLetters = [];
 
     //generate random word/phrase & a set of images to use
     gameWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+    console.log(gameWord);
     pictureSetSelection = pictureSet[Math.floor(Math.random() * pictureSet.length)];
 
-    
     let gameWordToArray = [...gameWord.toUpperCase()];
 
     underscores = gameWordToArray.map(val => {
@@ -75,22 +72,13 @@ document.onkeydown = event => {
   }
 }
 
-//This fx will look at the letter and see if it exists in the gameWord var.
-//If so, we will push that letter to the underscore index that is equal to the index where the letter exists in the gameWord
-//If not, we will reduce guesses by 1
-
+//Check guess and either push to incorrect guesses, or replace underscore w/ letter
 function evaluateGuess(letter) {
-  //This variable is holding the index(es) where the guessed letter appears in the gameWord
-  let positions = [];
-  let gameWordLowercase = gameWord.toLowerCase();
+  let gameWordToArray = [...gameWord.toLowerCase()];
+  let positions = gameWordToArray.filter((val, i) => {
+    if (val === letter) {return letter};
+  })
 
-  //For loop is checking if/where characters match in the gameWord
-  for (var i = 0; i < gameWord.length; i++) {
-    if (gameWordLowercase.charAt(i) === letter) {
-      //this pushes the index of the letter match to the positions array above
-      positions.push(i);
-    }
-  }
   //First 'If' condition analyzes the 'positions' array.  If there's nothing in there, that means the letter does not exist in the gameWord, so we'll decrement remainingGuesses. 
   if (positions.length <= 0) {
     if (guessedLetters.indexOf(` ${letter.toUpperCase()}`) === -1) {
@@ -104,8 +92,10 @@ function evaluateGuess(letter) {
     //Start 2nd condition
   } else {
       //Here we map thru all entries in 'positions' array and change the letter in that position in the game word to the initial user's input
-      positions.map((val, j) => {
-        underscores[positions[j]] = letter.toUpperCase();
+      gameWordToArray.map((val, i) => {
+        if (val === letter) {
+          underscores[i] = letter.toUpperCase();
+        }
       })
     }
   updateDisplay();
@@ -113,17 +103,17 @@ function evaluateGuess(letter) {
 
 function updateDisplay() {
   let displayUnderscores = underscores.join("");
-  document.getElementById("underscores").innerText = displayUnderscores;
-  document.getElementById("remainingGuesses").innerText = remainingGuesses;
-  document.getElementById("guessedLetters").innerText = guessedLetters;
-  document.getElementById("hangmanIndex").src=`assets/images/${pictureSetSelection}${remainingGuesses}.PNG`;
+  $("#underscores").text(displayUnderscores);
+  $("#remainingGuesses").text(remainingGuesses);
+  $("#guessedLetters").text(guessedLetters);
+  $("#hangmanIndex").attr("src",`assets/images/${pictureSetSelection}${remainingGuesses}.PNG`);
   checkWins(displayUnderscores);
 }
 
 function checkWins() {
   if (underscores.indexOf("_ ") === -1) {
     wins++;
-    document.getElementById("winsCounter").innerText = wins;
+    $("#winsCounter").text(wins);
     hasFinished = true;
 
     //After win, populate 'WINNER' message

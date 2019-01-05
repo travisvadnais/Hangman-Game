@@ -1,7 +1,5 @@
-  //Array for possible game words
   let hangmanWords = ["Gregor Clegane", "Joffrey Baratheon", "Dragonstone", "Winter Is Coming", "Lord of Light", "The Night King", "King's Landing", "Valar Morghulis", "Valar Dohaeris", "Milk of the Poppy", "The Red Wedding", "Rains of Castamere", "Cersei Lannister", "Valyrian Steel", "White Walkers", "Blood of My Blood", "Dothraki Screamer", "Faceless Men", "Hand of the King", "Iron Throne", "Xaro Xhoan Daxos", "Barristan Selmy", "Astapor", "Yunkai", "Three Eyed Raven", "Widow's Wail", "Dracarys", "The King of the North", "Dragonglass", "Faith of the Seven", "The Mad King", "The Long Night", "The Doom of Valyria"]
 
-  //variable to hold the random game word (not to be displayed)
   let gameWord;
 
   //variable to clone the length of the gameWord w/ underscores
@@ -18,14 +16,14 @@
   //array to hold the two sets of hangman picture progressions
   let pictureSet = ["Stark", "Wall"];
 
-  let hasFinished = false;
+  let gameOver = false;
   resetGame();
   $("#resultsDisplay").text("WARNING: This Game Is Dark and Full of Spoilers");
 
   $("#start-button").click(resetGame);
   
   function resetGame() {//Set everything back to defaults
-    hasFinished = false;
+    gameOver = false;
     remainingGuesses = 8;
     guessedLetters = [];
     $("#game_area").show();
@@ -42,31 +40,23 @@
     let gameWordToArray = [...gameWord.toUpperCase()];
 
     underscores = gameWordToArray.map(val => {
-      if (val == "'") {
-        return ("'");
-      }
-      else if (val ==" ") {
-        return ("  ");
-      }
-      else {
-        return ("_ ")
-      }
+      if (val == "'") {return ("'")}
+      else if (val ==" ") {return ("  ")}
+      else {return ("_ ")}
     })  
     updateDisplay();
   }
 
 //Check entered key to see if it's a letter.  If so, change it to lowercase and continue.  
 document.onkeydown = event => {
-  if (hasFinished === true) {
+  if (gameOver) {
       resetGame();
   } 
   else {
-    //set userGuess variable to the key that was pressed
     let userGuess = event.key;
     //If statement that will only process if the key pressed was a letter
     if (event.keyCode >= 65 && event.keyCode <= 90) {
       $("#resultsDisplay").text(`"${userGuess.toUpperCase()}" Is Correct!`);
-      //This will set up function 'makeGuess' with a lowercase letter
       evaluateGuess(event.key.toLowerCase());
     }
   }
@@ -89,7 +79,6 @@ function evaluateGuess(letter) {
     } else {
         $("#resultsDisplay").text(`You already guessed '${letter.toUpperCase()}'. Try again.`);
     }
-    //Start 2nd condition
   } else {
       //Here we map thru all entries in 'positions' array and change the letter in that position in the game word to the initial user's input
       gameWordToArray.map((val, i) => {
@@ -107,14 +96,14 @@ function updateDisplay() {
   $("#remainingGuesses").text(remainingGuesses);
   $("#guessedLetters").text(guessedLetters);
   $("#hangmanIndex").attr("src",`assets/images/${pictureSetSelection}${remainingGuesses}.PNG`);
-  checkWins(displayUnderscores);
+  checkWins();
 }
 
 function checkWins() {
   if (underscores.indexOf("_ ") === -1) {
     wins++;
     $("#winsCounter").text(wins);
-    hasFinished = true;
+    gameOver = true;
 
     //After win, populate 'WINNER' message
     $("#game_area").hide();
@@ -126,24 +115,17 @@ function checkWins() {
       $("#hangmanIndex").attr("src", "assets/images/HappyAlliser.jpg");
     }
   } else if (remainingGuesses <= 0) {
-      hasFinished = true;
+      gameOver = true;
       losses++;
       $("#lossCounter").text(losses);
-
-      //After loss, populate iframe clip
+      let iframe = document.createElement("iframe");
       if (pictureSetSelection === "Stark") {
-        let iframe = document.createElement("iframe");
         iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1");
-        document.getElementById("executionClip").appendChild(iframe);
       }
-      //This is the second iFrame scenario
       else {
-        let iframe2 = document.createElement("iframe");
-        iframe2.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
-        document.getElementById("executionClip").appendChild(iframe2);
+        iframe.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
       }
-
-    //After loss, populate 'LOSER' message
+    $("#executionClip").append(iframe);
     $("#resultsDisplay").text("You Lose. Press Any Key to Play Again!");
   }
 }

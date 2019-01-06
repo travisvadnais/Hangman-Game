@@ -1,6 +1,7 @@
   let hangmanWords = ["Gregor Clegane", "Joffrey Baratheon", "Dragonstone", "Winter Is Coming", "Lord of Light", "The Night King", "King's Landing", "Valar Morghulis", "Valar Dohaeris", "Milk of the Poppy", "The Red Wedding", "Rains of Castamere", "Cersei Lannister", "Valyrian Steel", "White Walkers", "Blood of My Blood", "Dothraki Screamer", "Faceless Men", "Hand of the King", "Iron Throne", "Xaro Xhoan Daxos", "Barristan Selmy", "Astapor", "Yunkai", "Three Eyed Raven", "Widow's Wail", "Dracarys", "The King of the North", "Dragonglass", "Faith of the Seven", "The Mad King", "The Long Night", "The Doom of Valyria"]
 
   let gameWord;
+  let bgImg;
   let underscores = [];
   let incorrectGuesses = [];
   let wins = 0;
@@ -26,6 +27,9 @@
     gameWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
     console.log(gameWord);
     pictureSetSelection = pictureSet[Math.floor(Math.random() * pictureSet.length)];
+    bgImgNum = Math.floor(Math.random() * 4);
+    bgImgPath = `url(assets/images/bg${bgImgNum}.jpg)`
+    $("body").css("background-image", bgImgPath);
 
     let gameWordToArray = [...gameWord.toUpperCase()];
 
@@ -94,23 +98,15 @@ function checkWins() {
     gameOver = true;
     $("#game_area").hide();
     $("#resultsDisplay").text("You Win!  Press Any Key to Play Again!");
-    if (pictureSetSelection === "Stark") {
-      $("#hangmanIndex").attr("src", "assets/images/HappyStark.jpg");
-    }
-    else {
-      $("#hangmanIndex").attr("src", "assets/images/HappyAlliser.jpg");
-    }
+    //TERNARY OPERATOR
+    (pictureSetSelection === "Stark") ? $("#hangmanIndex").attr("src", "assets/images/HappyStark.jpg"):$("#hangmanIndex").attr("src", "assets/images/HappyAlliser.jpg")
   } else if (remainingGuesses <= 0) {
       gameOver = true;
       losses++;
       $("#lossCounter").text(losses);
       let iframe = document.createElement("iframe");
-      if (pictureSetSelection === "Stark") {
-        iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1");
-      }
-      else {
-        iframe.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
-      }
+      //TERNARY OPERATOR
+      (pictureSetSelection === "Stark") ? iframe.setAttribute("src", "https://www.youtube.com/embed/EeWvXwN0Pxc?autoplay=1"):iframe.setAttribute("src", "https://www.youtube.com/embed/D0rB5XpmPiQ?autoplay=1")
     $("#executionClip").append(iframe);
     $("#resultsDisplay").text("You Lose. Press Any Key to Play Again!");
   }
